@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import {HttpClient} from '@angular/common/http';
 import { ProductResponseModel } from 'src/app/models/productResponseModel';
+import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
@@ -13,15 +14,20 @@ export class ProductComponent implements OnInit {
 
  
   products : Product[] = [];
-  //productResponseModel : ProductResponseModel={};
-  constructor(private httpClient:HttpClient) { }
+  dataLoaded = false;
+  
+  constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
-    console.log("Init çalıştı");
-    
+    this.getProducts();
   }
 
+  // gelen datayı ProductResponseModel e map eder!!
+  // Async çalısır
   getProducts(){
-
+    this.productService.getProducts().subscribe(response=>{
+      this.products = response.data
+      this.dataLoaded = true;
+    })
   }
 }
