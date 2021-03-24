@@ -17,8 +17,8 @@
   />
 </div>
 
-<div *ngIf="filterText.length > 2" class="alert alert-success">
-  {{ filterText }} aradınız
+<div *ngIf="filterText.length > 0" class="alert alert-success">
+  {{filterText}} aradınız
 </div>
 
 <table *ngIf="dataLoaded == true" class="table">
